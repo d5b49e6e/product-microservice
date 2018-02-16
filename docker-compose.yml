@@ -1,0 +1,29 @@
+ version: "3.1"
+ services:
+    redis:
+        image: 'bitnami/redis:latest'
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+        expose:
+            - "6379"
+        ports:
+            - 6379:6379
+    mongo:
+        image: 'tutum/mongodb:latest'
+        environment:
+            - AUTH=no
+        expose:
+            - 27017
+        ports:
+            - 27017:27017
+    app:
+        build: ./product-microservice
+        image: 'product-ds/product-microservice' 
+        depends_on:
+            - redis
+            - mongo 
+        expose:
+            - 8080
+        ports:
+            - 8080:8080
+
