@@ -1,5 +1,10 @@
 = Product Microservice 
-This project is build with Spring Boot 2.0, MongoDb, Redis (for session caching) and Docker Compose
+
+This project is uses:
+. Spring Boot 2.0
+. MongoDb 
+. Redis (for session caching) 
+. Docker Compose
 
 = Quick start
 . cd product-microservice
@@ -10,10 +15,10 @@ This project is build with Spring Boot 2.0, MongoDb, Redis (for session caching)
 The following will demonstrate the usage of the HTTP endpoints and example responses.
 
 
-. login
-.. username:user
-.. password:password
-... note: cut and paste the X-Auth-Token for future calls
+login
+. username: user
+. password: password
+.. note: cut and paste the X-Auth-Token for future calls
 
 ----
 curl -i --user user:password localhost:8080/login
@@ -31,7 +36,7 @@ Date: Thu, 12 Apr 2018 22:29:48 GMT
 
 ----
 
-. get a list of all products
+get a list of all products
 
 ----
 
@@ -67,7 +72,7 @@ curl -i localhost:8080/products/ \
 
 ----
 
-. get a single product
+get a single product
 
 ----
 
@@ -85,7 +90,7 @@ curl -i localhost:8080/products/5a851cef01aa8707ac4f5451 \
 
 ----
 
-. update product
+update product
 
 ----
 
@@ -99,7 +104,7 @@ curl -i localhost:8080/products/5a851cef01aa8707ac4f5453 \
 
 ----
 
-. create new product
+create new product
 
 ----
 
@@ -111,7 +116,7 @@ curl -i localhost:8080/products/ \
 
 ----
 
-. delete product
+delete product
 
 ----
 
@@ -121,7 +126,7 @@ curl -i localhost:8080/products/5a851cef01aa8707ac4f5451 \
 
 ----
 
-. logout
+logout
 
 ----
 
