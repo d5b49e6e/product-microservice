@@ -1,0 +1,136 @@
+= Product Microservice 
+This project is build with Spring Boot 2.0, MongoDb, Redis (for session caching) and Docker Compose
+
+= Quick start
+. cd product-microservice
+. sh buildAndRun.sh
+
+== Usage
+
+The following will demonstrate the usage of the HTTP endpoints and example responses.
+
+
+. login
+.. username:user
+.. password:password
+... note: cut and paste the X-Auth-Token for future calls
+
+----
+curl -i --user user:password localhost:8080/login
+
+HTTP/1.1 200 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+X-Auth-Token: 0ba0caa7-3f35-4082-aa1f-8922906cbfed
+Content-Length: 0
+Date: Thu, 12 Apr 2018 22:29:48 GMT
+
+----
+
+. get a list of all products
+
+----
+
+curl -i localhost:8080/products/ \
+-H "X-Auth-Token:  0ba0caa7-3f35-4082-aa1f-8922906cbfed"
+
+[
+  {
+    "id": "5a851cef01aa8707ac4f5451",
+    "name": "Product 1",
+    "quantity": 5,
+    "price": 2500.05,
+    "createdDate": "2018-04-12T22:28:23.855+0000",
+    "modifiedDate": "2018-04-12T22:28:23.855+0000"
+  },
+  {
+    "id": "5a851cef01aa8707ac4f5452",
+    "name": "Product 2",
+    "quantity": 10,
+    "price": 2500.1,
+    "createdDate": "2018-04-12T22:28:23.855+0000",
+    "modifiedDate": "2018-04-12T22:28:23.855+0000"
+  },
+  {
+    "id": "5a851cef01aa8707ac4f5453",
+    "name": "Product 3",
+    "quantity": 15,
+    "price": 2500.15,
+    "createdDate": "2018-04-12T22:28:23.855+0000",
+    "modifiedDate": "2018-04-12T22:28:23.855+0000"
+  }
+]
+
+----
+
+. get a single product
+
+----
+
+curl -i localhost:8080/products/5a851cef01aa8707ac4f5451 \
+-H "X-Auth-Token:  0ba0caa7-3f35-4082-aa1f-8922906cbfed"
+
+{
+  "id": "5a851cef01aa8707ac4f5451",
+  "name": "Product 1",
+  "quantity": 5,
+  "price": 2500.05,
+  "createdDate": "2018-04-12T22:28:23.855+0000",
+  "modifiedDate": "2018-04-12T22:28:23.855+0000"
+}
+
+----
+
+. update product
+
+----
+
+curl -i localhost:8080/products/5a851cef01aa8707ac4f5453 \
+-XPUT \
+-d '{"name":"Product 333","quantity":333,"price":333.33}' \
+-H "Content-Type: application/json" \
+-H "X-Auth-Token:  0ba0caa7-3f35-4082-aa1f-8922906cbfed"
+
+
+
+----
+
+. create new product
+
+----
+
+curl -i localhost:8080/products/ \
+-XPOST \
+-d '{"name":"Product 4","quantity":44,"price":444.44}' \
+-H "Content-Type: application/json" \
+-H "X-Auth-Token:  0ba0caa7-3f35-4082-aa1f-8922906cbfed"
+
+----
+
+. delete product
+
+----
+
+curl -i localhost:8080/products/5a851cef01aa8707ac4f5451 \
+-XDELETE \
+-H "X-Auth-Token:  0ba0caa7-3f35-4082-aa1f-8922906cbfed"
+
+----
+
+. logout
+
+----
+
+curl -i localhost:8080/logout \
+-H "X-Auth-Token:  0ba0caa7-3f35-4082-aa1f-8922906cbfed"
+
+----
+
+
+
+
+
